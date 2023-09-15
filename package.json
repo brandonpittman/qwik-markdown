@@ -17,11 +17,13 @@
   "author": "Brandon Pittman",
   "license": "MIT",
   "dependencies": {
-    "@builder.io/qwik": "^1.2.11",
     "@clack/prompts": "^0.7.0",
-    "@types/node": "^20.6.0",
     "clipboardy": "^3.0.0",
-    "glob": "^10.3.4",
+    "glob": "^10.3.4"
+  },
+  "peerDependencies": {
+    "@types/node": "^20.6.0",
+    "@builder.io/qwik": "^1.2.11",
     "valibot": "^0.15.0"
   },
   "files": [
