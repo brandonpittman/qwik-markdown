@@ -18,9 +18,21 @@ import clipboard from "clipboardy";
 const capitalizeFirstLetter = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
+const handleCancel = (valueToCheck: unknown, message = "Goodbye!") => {
+  if (isCancel(valueToCheck)) {
+    cancel(message);
+    process.exit(0);
+  }
+};
+
 const configFiles = globSync("src/routes/*/schema.ts", {
   ignore: "node_modules/**",
 });
+
+if (!configFiles.length) {
+  cancel("No schema.ts files found under '/routes'.");
+  process.exit(1);
+}
 
 const mappedConfigFiles = configFiles.map((raw) => {
   const type = raw.split("src/routes/")[1].split("/")[0];
@@ -30,15 +42,7 @@ const mappedConfigFiles = configFiles.map((raw) => {
   };
 });
 
-const handleCancel = (valueToCheck: unknown, message = "Goodbye!") => {
-  if (isCancel(valueToCheck)) {
-    cancel(message);
-    process.exit(0);
-  }
-};
-
-const validSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*(\.(mdx?))?$/g;
-const validExtension = /\.(mdx?)$/g;
+const validSlug = /^[a-z0-9]+(-[a-z0-9]+)*\.(mdx?)$/g;
 
 type Resource = { raw: string; type: string };
 
@@ -66,16 +70,16 @@ const entries = Object.entries(schema.object);
 const metadata: Record<string, string | Symbol> = {};
 
 const filename = await text({
-  message: "Filename?",
+  message: "Enter a filename",
   validate(value) {
     const validated = safeParse(
       string([
         minLength(1, "Filename cannot be empty"),
-        regex(validSlug, "Invalid filename slug"),
-        regex(validExtension, "Extension must be .md or .mdx"),
+        regex(validSlug, "Invalid filename or extension"),
       ]),
       value
     );
+
     if (validated.success) {
       const writePath = `${process.cwd()}/routes/${resource.type}/${
         value.split(".")[0]
