@@ -1,14 +1,14 @@
 #!/usr/bin/env tsx
 
-import { runGenerateCommand } from "./generate.mjs";
-import { runValidateCommand } from "./validate.mjs";
+import { runGenerateCommand } from "./generate";
+import { runValidateCommand } from "./validate";
 
 const args = process.argv.slice(2);
 
 switch (args[0]) {
   case "g":
   case "generate":
-    await runGenerateCommand();
+    runGenerateCommand();
     break;
   case "v":
   case "validate":
