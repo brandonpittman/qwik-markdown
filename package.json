@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.mts",
   "bin": {
-    "qwik-markdown-generator": "./src/index.mts"
+    "qwik-markdown-generator": "src/index.mts"
   },
   "scripts": {
     "qwik": "qwik"
