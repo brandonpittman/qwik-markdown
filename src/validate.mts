@@ -28,9 +28,11 @@ export const runValidateCommand = () => {
             `${issue.message}: ` +
             issue.path
               .map((item) => item.key)
-              .join(":")
+              .join(" - ")
               .replace(/(\d+)/, (v) => contentFiles[v])
-              .replace("src/routes/", "");
+              .replace("src/routes/", "")
+              .replace(/\/index/, "")
+              .replace(/\.mdx?/, "");
 
           console.log(validated.issues.map((i) => dotPath(i)));
         }
