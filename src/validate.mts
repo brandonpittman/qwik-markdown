@@ -20,7 +20,7 @@ export const runValidateCommand = () => {
     const contentFiles = globSync(`src/routes/${f.type}/**/*.{md,mdx}`);
     const dataMap = contentFiles.map((v) => matter(readFileSync(v)).data);
 
-    import("../" + f.raw)
+    import(process.cwd() + "/" + f.raw)
       .then(({ schema }) => {
         const validated = safeParse(array(schema), dataMap);
         if (!validated.success) {
