@@ -1,10 +1,12 @@
 # Qwik Markdown
 
+🚨 Requires Qwik v1.2.8 or higher.
+
 ## Command List
 
 ```sh
 generate, g
-    Generate a Markdown route using Qwik City's built-in generator
+    Generate a Markdown route using the built-in generator in Qwik City.
 
 validate, v
     Validate Markdown route's frontmatter using Valibot
