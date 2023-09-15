@@ -18,7 +18,7 @@ import clipboard from "clipboardy";
 const capitalizeFirstLetter = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
-const configFiles = globSync(process.cwd() + "src/routes/*/schema.ts", {
+const configFiles = globSync("src/routes/*/schema.ts", {
   ignore: "node_modules/**",
 });
 
@@ -55,7 +55,7 @@ const resource = (await select({
 
 handleCancel(resource);
 
-const { schema } = await import("../" + resource.raw);
+const { schema } = await import(process.cwd() + resource.raw);
 
 if (schema.schema !== "object") {
   throw new Error("Schema must be an object schema.");
