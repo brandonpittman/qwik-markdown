@@ -55,7 +55,7 @@ const resource = (await select({
 
 handleCancel(resource);
 
-const { schema } = await import(process.cwd() + resource.raw);
+const { schema } = await import(process.cwd() + "/" + resource.raw);
 
 if (schema.schema !== "object") {
   throw new Error("Schema must be an object schema.");
