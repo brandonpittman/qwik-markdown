@@ -1,16 +1,17 @@
 {
-  "name": "qwik-markdown-generator",
-  "version": "0.0.14",
-  "description": "",
+  "name": "qwik-md",
+  "version": "0.0.1",
+  "description": "A helpful utility for creating Markdown files and validating their frontmatter in Qwik City apps.",
   "main": "src/cli.mts",
   "bin": {
-    "qwik-markdown-generator": "src/cli.mts"
+    "qwik-md": "src/cli.mts"
   },
   "scripts": {
     "qwik": "qwik"
   },
   "keywords": [
     "qwik",
+    "qwikcity",
     "cli",
     "clack"
   ],
