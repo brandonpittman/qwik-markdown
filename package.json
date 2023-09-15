@@ -21,7 +21,8 @@
     "@clack/prompts": "^0.7.0",
     "clipboardy": "^3.0.0",
     "glob": "^10.3.4",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "picocolors": "^1.0.0"
   },
   "peerDependencies": {
     "@builder.io/qwik": "^1.2.11",
