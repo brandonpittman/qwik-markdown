@@ -95,7 +95,7 @@ const filename = await text({
 
 handleCancel(filename);
 
-const writePath = `${process.cwd()}/routes/${resource.type}/${
+const writePath = `${process.cwd()}/src/routes/${resource.type}/${
   (filename as string).split(".")[0]
 }/index.md`;
 
