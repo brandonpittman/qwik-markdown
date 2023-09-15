@@ -23,23 +23,6 @@ const handleCancel = (valueToCheck: unknown, message = "Goodbye!") => {
   }
 };
 
-const configFiles = globSync("src/routes/*/schema.ts", {
-  ignore: "node_modules/**",
-});
-
-if (!configFiles.length) {
-  cancel("No schema.ts files found under '/routes'.");
-  process.exit(1);
-}
-
-const mappedConfigFiles = configFiles.map((raw) => {
-  const type = raw.split("src/routes/")[1].split("/")[0];
-  return {
-    raw,
-    type,
-  };
-});
-
 const validSlug = /^[a-z0-9]+(-[a-z0-9]+)*\.(mdx?)$/g;
 
 type Resource = { raw: string; type: string };
@@ -47,6 +30,23 @@ type Resource = { raw: string; type: string };
 export const runGenerateCommand = async () => {
   console.clear();
   intro("Create new resource");
+
+  const configFiles = globSync("src/routes/*/schema.ts", {
+    ignore: "node_modules/**",
+  });
+
+  if (!configFiles.length) {
+    cancel("No schema.ts files found under '/routes'.");
+    process.exit(1);
+  }
+
+  const mappedConfigFiles = configFiles.map((raw) => {
+    const type = raw.split("src/routes/")[1].split("/")[0];
+    return {
+      raw,
+      type,
+    };
+  });
 
   const resource = (await select({
     message: "Pick a resource type.",
