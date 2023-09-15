@@ -18,7 +18,7 @@ import clipboard from "clipboardy";
 const capitalizeFirstLetter = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
 
-const configFiles = globSync("src/routes/*/schema.ts", {
+const configFiles = globSync(process.cwd() + "src/routes/*/schema.ts", {
   ignore: "node_modules/**",
 });
 
@@ -77,7 +77,7 @@ const filename = await text({
       value
     );
     if (validated.success) {
-      const writePath = `src/routes/${resource.type}/${
+      const writePath = `${process.cwd()}/routes/${resource.type}/${
         value.split(".")[0]
       }/index.md`;
 
@@ -95,7 +95,7 @@ const filename = await text({
 
 handleCancel(filename);
 
-const writePath = `src/routes/${resource.type}/${
+const writePath = `${process.cwd()}/routes/${resource.type}/${
   (filename as string).split(".")[0]
 }/index.md`;
 
