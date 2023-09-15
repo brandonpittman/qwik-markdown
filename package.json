@@ -2,7 +2,7 @@
   "name": "qwik-markdown-generator",
   "version": "0.0.12",
   "description": "",
-  "main": "src/index.mts",
+  "main": "src/cli.mts",
   "bin": {
     "qwik-markdown-generator": "src/cli.mts"
   },
@@ -28,7 +28,7 @@
     "valibot": "^0.15.0"
   },
   "files": [
-    "src/index.mts"
+    "src"
   ],
   "devDependencies": {
     "@builder.io/qwik": "^1.2.11",

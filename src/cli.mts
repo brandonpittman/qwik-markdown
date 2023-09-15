@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 
-import { runGenerateCommand } from "./generate";
-import { runValidateCommand } from "./validate";
+import { runGenerateCommand } from "./generate.mjs";
+import { runValidateCommand } from "./validate.mjs";
 
 const args = process.argv.slice(2);
 
