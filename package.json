@@ -1,6 +1,6 @@
 {
   "name": "qwik-markdown-generator",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "src/cli.mts",
   "bin": {
