@@ -1,6 +1,8 @@
 # Qwik Markdown
 
-<img width="589" alt="CleanShot 2023-09-16 at 0 00 39@2x" src="https://github.com/brandonpittman/qwik-markdown/assets/967145/40491a6f-208e-4328-93ff-dd1d027f2b9e">
+<p align="center">
+  <img width="642" alt="CleanShot 2023-09-16 at 0 02 48@2x" src="https://github.com/brandonpittman/qwik-markdown/assets/967145/0288ab67-ba8a-4cba-9dac-0d4a0eaa541b">
+</p>
 
 
 🚨 Requires Qwik v1.2.8 or higher.
