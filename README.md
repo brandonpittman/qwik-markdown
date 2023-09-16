@@ -1,5 +1,8 @@
 # Qwik Markdown
 
+<img width="589" alt="CleanShot 2023-09-16 at 0 00 39@2x" src="https://github.com/brandonpittman/qwik-markdown/assets/967145/40491a6f-208e-4328-93ff-dd1d027f2b9e">
+
+
 🚨 Requires Qwik v1.2.8 or higher.
 
 ## Available Commands
