@@ -4,7 +4,6 @@
   <img width="642" alt="CleanShot 2023-09-16 at 0 02 48@2x" src="https://github.com/brandonpittman/qwik-markdown/assets/967145/0288ab67-ba8a-4cba-9dac-0d4a0eaa541b">
 </p>
 
-
 🚨 Requires Qwik v1.2.8 or higher.
 
 ## Available Commands
@@ -52,7 +51,7 @@ If you run `qwik-markdown validate`, it will fail because you don't have a `titl
 
 ```md
 ---
-title: "Hello World
+title: "Hello World"
 ---
 ```
 
