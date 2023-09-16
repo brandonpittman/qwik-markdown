@@ -2,34 +2,64 @@
 
 🚨 Requires Qwik v1.2.8 or higher.
 
-## Command List
+## Available Commands
+
+### generate, g
+
+Generate a Markdown route using the built-in generator in Qwik City.
+
+### validate, v
+
+Validate Markdown route's frontmatter using Valibot
+
+## Setup
+
+Both of the commands above require you to define [Valibot][] schemas in the root of your routes that contain Markdown routes.
+
+Say you have a tree structure like this:
 
 ```sh
-generate, g
-    Generate a Markdown route using the built-in generator in Qwik City.
-
-validate, v
-    Validate Markdown route's frontmatter using Valibot
+src
+  routes
+    posts
+      schema.ts
+      hello-world
+        index.md
 ```
 
-## Generate
+In `schema.ts`, you might have a Valibot schema like this:
 
-### Example
+```ts
+import { object, string, minLength } from "valibot";
 
-`npx qwik-markdown generate`
+export const schema = object({
+  title: string([minLength(1, "Title required")]),
+});
+```
 
-### Description
+Let's say your `hello-world/index.md` contains this:
 
-Lets you generate Markdown routes with a named folder and an enclosed `index.md` or `index.mdx`.
+```md
+This is my first post!
+```
 
-Currently interactive only. Passing params coming soon.
+If you run `qwik-markdown validate`, it will fail because you don't have a `title` defined. So change the front matter to:
 
-## Validate
+```md
+---
+title: "Hello World
+---
+```
 
-### Example
+If you run `qwik-markdown validate` again, validation will pass and nothing will be displayed. Helpful to run before `qwik build` to ensure all your Markdown files have the necessary frontmatter defined. Currently, `string(), enumType(), boolean(), and optional()` validations are supported.
 
-`npx qwik-markdown validate`
+## Generate New Markdown Routes
 
-### Description
+With your `schema.ts` files set up, Qwik Markdown can infer the type of frontmatter you need for each route. If you run `qwik-markdown generate`, a series of prompts will be shown to gather info about the filename to use and each frontmatter value to be used. The filename you provide should:
 
-Searches for `schema.ts` files that export a Valibot object schema called `schema` in a route root. The schema file for a route populates the generator options.
+1. Consist of numbers or lowercase letters, separated by hyphens
+2. End in `.md` or `.mdx`
+
+If you provide a filename like `my-second-post.md`, you'll get a new route at `src/routes/posts/my-second-post/index.md`. The frontmatter will then be populated with the values you provide in the following prompts.
+
+[valibot]: https://valibot.dev
