@@ -62,4 +62,9 @@ With your `schema.ts` files set up, Qwik Markdown can infer the type of frontmat
 
 If you provide a filename like `my-second-post.md`, you'll get a new route at `src/routes/posts/my-second-post/index.md`. The frontmatter will then be populated with the values you provide in the following prompts.
 
+## Known Issues
+
+- `generate` command is interactive-only. May support passing command-line params in the future.
+- `validate` errors aren't formatted as well as they could be. Will be addressed in the future.
+
 [valibot]: https://valibot.dev
