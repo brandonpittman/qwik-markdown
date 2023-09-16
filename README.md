@@ -10,11 +10,11 @@
 
 ### generate, g
 
-Generate a Markdown route using the built-in generator in Qwik City.
+Generate a Markdown route
 
 ### validate, v
 
-Validate Markdown route's frontmatter using Valibot
+Validate frontmatter using Valibot
 
 ## Setup
 
