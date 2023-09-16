@@ -30,7 +30,7 @@
     "valibot": "^0.15.0"
   },
   "files": [
-    "src"
+    "src/*.mts"
   ],
   "devDependencies": {
     "@builder.io/qwik": "^1.2.11",
