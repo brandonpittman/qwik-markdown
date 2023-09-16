@@ -46,5 +46,7 @@ switch (args[0]) {
         .join("\n"),
       "Available commands"
     );
-    outro("Visit https://github.com/brandonpittman/qwik-markdown more.");
+    outro(
+      "Visit https://github.com/brandonpittman/qwik-markdown for more information."
+    );
 }
