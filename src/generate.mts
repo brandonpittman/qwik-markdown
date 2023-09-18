@@ -66,8 +66,10 @@ export const runGenerateCommand = async () => {
 
   const entries = Object.entries(schema.object);
 
-  const metadata: Record<string, { type: string; value?: string | Symbol }> =
-    {};
+  const metadata: Record<
+    string,
+    { type: "boolean" | "string" | "enum"; value?: string | Symbol }
+  > = {};
 
   const filename = await text({
     message: "Enter a filename",
@@ -111,7 +113,7 @@ export const runGenerateCommand = async () => {
     const parsedSchema =
       subSchema.schema === "optional" ? subSchema.wrapped : subSchema;
 
-    metadata[key] = { type: parsedSchema };
+    metadata[key] = { type: parsedSchema.schema };
 
     switch ((parsedSchema as any).schema) {
       case "boolean":
@@ -163,14 +165,7 @@ export const runGenerateCommand = async () => {
   const output = `---
 ${Object.entries(metadata)
   .filter(([, v]) => v.value != null)
-  .map(
-    ([k, v]) =>
-      `${k}: ${
-        ["true", "false"].includes(v.value as "true" | "false")
-          ? `${v.value}`
-          : `"${v.value}"`
-      }`
-  )
+  .map(([k, v]) => `${k}: ${v.type === "string" ? `"${v.value}"` : v.value}`)
   .join("\n")}
 ---`;
 
