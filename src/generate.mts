@@ -66,7 +66,8 @@ export const runGenerateCommand = async () => {
 
   const entries = Object.entries(schema.object);
 
-  const metadata: Record<string, string | Symbol> = {};
+  const metadata: Record<string, { type: string; value?: string | Symbol }> =
+    {};
 
   const filename = await text({
     message: "Enter a filename",
@@ -110,9 +111,11 @@ export const runGenerateCommand = async () => {
     const parsedSchema =
       subSchema.schema === "optional" ? subSchema.wrapped : subSchema;
 
+    metadata[key] = { type: parsedSchema };
+
     switch ((parsedSchema as any).schema) {
       case "boolean":
-        metadata[key] = await select({
+        metadata[key].value = await select({
           message: capitalizeFirstLetter(key) + "?",
           initialValue: initialValue ? "true" : "false",
           options: [
@@ -133,7 +136,7 @@ export const runGenerateCommand = async () => {
         });
         break;
       default:
-        metadata[key] = await text({
+        metadata[key].value = await text({
           message: capitalizeFirstLetter(key) + "?",
           initialValue,
           validate(value) {
@@ -148,7 +151,7 @@ export const runGenerateCommand = async () => {
         });
     }
 
-    handleCancel(metadata[key]);
+    handleCancel(metadata[key].value);
   }
 
   const command = execSync(
@@ -159,11 +162,13 @@ export const runGenerateCommand = async () => {
 
   const output = `---
 ${Object.entries(metadata)
-  .filter(([, v]) => v)
+  .filter(([, v]) => v.value != null)
   .map(
     ([k, v]) =>
       `${k}: ${
-        ["true", "false"].includes(v as "true" | "false") ? `${v}` : `"${v}"`
+        ["true", "false"].includes(v.value as "true" | "false")
+          ? `${v.value}`
+          : `"${v.value}"`
       }`
   )
   .join("\n")}
