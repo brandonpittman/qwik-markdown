@@ -1,6 +1,6 @@
-import { isoDate, minLength, object, string } from "valibot";
+import { object, string, minLength, date, coerce } from "valibot";
 
 export const schema = object({
   name: string([minLength(1)]),
-  date: string([isoDate("ISO date required")]),
+  birthdate: coerce(date(), (i) => new Date(i as string | number | Date)),
 });
