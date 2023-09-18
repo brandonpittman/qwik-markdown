@@ -55,7 +55,7 @@ title: "Hello World"
 ---
 ```
 
-If you run `qwik-markdown validate` again, validation will pass and nothing will be displayed. Helpful to run before `qwik build` to ensure all your Markdown files have the necessary frontmatter defined. Currently, `string(), enumType(), boolean(), and optional()` validations are supported.
+If you run `qwik-markdown validate` again, validation will pass and nothing will be displayed. Helpful to run before `qwik build` to ensure all your Markdown files have the necessary frontmatter defined. <!--Currently, `string(), enumType(), boolean(), and optional()` validations are supported.-->
 
 ## Generate New Markdown Routes
 
@@ -70,6 +70,8 @@ If you provide a filename like `my-second-post.md`, you'll get a new route at `s
 
 - `generate` command is interactive-only. May support passing command-line params in the future.
 - `validate` errors aren't formatted as well as they could be. Will be addressed in the future.
-- Doesn't check if Qwik 1.2.8 or higher is installed. 
+- Doesn't check if Qwik 1.2.8 or higher is installed.
+- If you want to have a non-string or non-boolean type like `date()`, you'll need to use [`coerce`][coerce].
 
 [valibot]: https://valibot.dev
+[coerce]: https://valibot.dev/guides/methods/#coerce
