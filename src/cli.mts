@@ -3,7 +3,15 @@
 import { intro, note, outro } from "@clack/prompts";
 import { runGenerateCommand } from "./generate.mjs";
 import { runValidateCommand } from "./validate.mjs";
+import { isValidVersion } from "./compare-versions.mjs";
 import pc from "picocolors";
+
+if (!isValidVersion()) {
+  console.error(
+    pc.bold(pc.red("Qwik Markdown requires Qwik 1.2.8 or greater."))
+  );
+  process.exit(1);
+}
 
 const args = process.argv.slice(2);
 
