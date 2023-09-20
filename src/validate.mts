@@ -1,6 +1,6 @@
 import { globSync } from "glob";
 import matter from "gray-matter";
-import { parse, array, safeParse } from "valibot";
+import { array, safeParse } from "valibot";
 import { readFileSync } from "fs";
 
 export const runValidateCommand = () => {

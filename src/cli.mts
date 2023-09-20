@@ -6,7 +6,7 @@ import { runValidateCommand } from "./validate.mjs";
 import { isValidVersion } from "./compare-versions.mjs";
 import pc from "picocolors";
 
-if (!isValidVersion()) {
+if (!(await isValidVersion())) {
   console.error(
     pc.bold(pc.red("Qwik Markdown requires Qwik 1.2.8 or greater."))
   );
