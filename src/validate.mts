@@ -35,6 +35,7 @@ export const runValidateCommand = () => {
               .replace(/\.mdx?/, "");
 
           console.log(validated.issues.map((i) => dotPath(i)));
+          process.exit(1);
         }
       })
       .catch((e: Error) => {
