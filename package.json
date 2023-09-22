@@ -1,6 +1,6 @@
 {
   "name": "qwik-markdown",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A helpful utility for creating Markdown files and validating their frontmatter in Qwik City apps.",
   "main": "src/cli.mts",
   "bin": {
