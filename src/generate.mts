@@ -128,7 +128,7 @@ export const runGenerateCommand = async () => {
 
         break;
       case "enum":
-        metadata[key] = await select({
+        metadata[key].value = await select({
           message: capitalizeFirstLetter(key) + "?",
           initialValue,
           options: parsedSchema.enum.map((v: string) => ({
