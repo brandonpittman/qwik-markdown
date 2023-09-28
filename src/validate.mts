@@ -34,7 +34,7 @@ export const runValidateCommand = () => {
               .replace(/\/index/, "")
               .replace(/\.mdx?/, "");
 
-          console.log(validated.issues.map((i) => dotPath(i)));
+          console.error(validated.issues.map((i) => dotPath(i)));
           process.exit(1);
         }
       })
