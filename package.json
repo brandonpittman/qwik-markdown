@@ -36,6 +36,6 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.2.11",
     "@types/node": "^20.6.0",
-    "valibot": "^0.15.0"
+    "valibot": "^0.18.0"
   }
 }
