@@ -1,6 +1,6 @@
 import { globSync } from "glob";
 import matter from "gray-matter";
-import { array, safeParse } from "valibot";
+import { array, Issue, safeParse } from "valibot";
 import { readFileSync } from "fs";
 
 export const runValidateCommand = () => {
@@ -24,8 +24,9 @@ export const runValidateCommand = () => {
       .then(({ schema }) => {
         const validated = safeParse(array(schema), dataMap);
         if (!validated.success) {
-          const dotPath = (issue) =>
+          const dotPath = (issue: Issue) =>
             `${issue.message}: ` +
+            // @ts-expect-error
             issue.path
               .map((item) => item.key)
               .join(" - ")
