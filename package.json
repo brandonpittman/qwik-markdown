@@ -19,19 +19,20 @@
   "license": "MIT",
   "dependencies": {
     "@clack/prompts": "^0.7.0",
+    "@sindresorhus/slugify": "^2.2.1",
     "clipboardy": "^3.0.0",
     "compare-versions": "^6.1.0",
     "glob": "^10.3.4",
     "gray-matter": "^4.0.3",
     "picocolors": "^1.0.0",
     "tsx": "^3.13.0",
-    "@builder.io/qwik": "^1.2.11",
     "valibot": "^0.21.0"
   },
   "files": [
     "src/*.mts"
   ],
   "devDependencies": {
+    "@builder.io/qwik": "^1.2.11",
     "@types/node": "^20.6.0"
   }
 }

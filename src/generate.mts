@@ -12,6 +12,7 @@ import {
 import { regex, safeParse, string, minLength, getFallback } from "valibot";
 import { existsSync, writeFileSync } from "node:fs";
 import clipboard from "clipboardy";
+import slugify from "@sindresorhus/slugify";
 
 const capitalizeFirstLetter = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1);
@@ -71,39 +72,7 @@ export const runGenerateCommand = async () => {
     { type: "boolean" | "string" | "enum"; value?: string | Symbol }
   > = {};
 
-  const filename = await text({
-    message: "Enter a filename",
-    validate(value) {
-      const validated = safeParse(
-        string([
-          minLength(1, "Filename cannot be empty"),
-          regex(validSlug, "Invalid filename or extension"),
-        ]),
-        value
-      );
-
-      if (validated.success) {
-        const writePath = `${process.cwd()}/routes/${resource.type}/${
-          value.split(".")[0]
-        }/index.md`;
-
-        const pathExists = existsSync(writePath);
-
-        if (pathExists) {
-          return "Path already exists";
-        }
-        return;
-      } else {
-        return validated.issues[0].message;
-      }
-    },
-  });
-
-  handleCancel(filename);
-
-  const writePath = `${process.cwd()}/src/routes/${resource.type}/${
-    (filename as string).split(".")[0]
-  }/index.md`;
+  let filename: string | Symbol = "";
 
   for (const [key, subSchema] of entries as [
     [string, { schema: any; default?: any; wrapped?: any }]
@@ -145,6 +114,9 @@ export const runGenerateCommand = async () => {
             if (isOptional) return;
             const validated = safeParse(parsedSchema, value);
             if (validated.success) {
+              if (["name", "title"].includes(key)) {
+                filename = slugify(validated.output);
+              }
               return;
             } else {
               return validated.issues.at(0)?.message;
@@ -155,6 +127,42 @@ export const runGenerateCommand = async () => {
 
     handleCancel(metadata[key].value);
   }
+
+  if (!filename) {
+    filename = await text({
+      message: "Enter a filename",
+      validate(value) {
+        const validated = safeParse(
+          string([
+            minLength(1, "Filename cannot be empty"),
+            regex(validSlug, "Invalid filename or extension"),
+          ]),
+          value
+        );
+
+        if (validated.success) {
+          const writePath = `${process.cwd()}/routes/${resource.type}/${
+            value.split(".")[0]
+          }/index.md`;
+
+          const pathExists = existsSync(writePath);
+
+          if (pathExists) {
+            return "Path already exists";
+          }
+          return;
+        } else {
+          return validated.issues[0].message;
+        }
+      },
+    });
+
+    handleCancel(filename);
+  }
+
+  const writePath = `${process.cwd()}/src/routes/${resource.type}/${
+    (filename as string).split(".")[0]
+  }/index.md`;
 
   const command = execSync(
     `npm run qwik new /${resource.type}/${filename as string}`
