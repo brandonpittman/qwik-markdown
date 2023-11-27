@@ -9,7 +9,7 @@ import {
   isCancel,
   confirm,
 } from "@clack/prompts";
-import { regex, safeParse, string, minLength } from "valibot";
+import { regex, safeParse, string, minLength, getFallback } from "valibot";
 import { existsSync, writeFileSync } from "node:fs";
 import clipboard from "clipboardy";
 
@@ -60,11 +60,11 @@ export const runGenerateCommand = async () => {
 
   const { schema } = await import(process.cwd() + "/" + resource.raw);
 
-  if (schema.schema !== "object") {
+  if (schema.type !== "object") {
     throw new Error("Schema must be an object schema.");
   }
 
-  const entries = Object.entries(schema.object);
+  const entries = Object.entries(schema.entries);
 
   const metadata: Record<
     string,
@@ -140,7 +140,7 @@ export const runGenerateCommand = async () => {
       default:
         metadata[key].value = await text({
           message: capitalizeFirstLetter(key) + "?",
-          initialValue,
+          initialValue: initialValue || getFallback(parsedSchema),
           validate(value) {
             if (isOptional) return;
             const validated = safeParse(parsedSchema, value);
