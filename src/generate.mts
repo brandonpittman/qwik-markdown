@@ -82,7 +82,7 @@ export const runGenerateCommand = async () => {
     const parsedSchema =
       subSchema.schema === "optional" ? subSchema.wrapped : subSchema;
 
-    metadata[key] = { type: parsedSchema.schema };
+    metadata[key] = { type: parsedSchema.type };
 
     switch ((parsedSchema as any).schema) {
       case "boolean":
