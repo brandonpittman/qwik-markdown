@@ -115,7 +115,7 @@ export const runGenerateCommand = async () => {
             const validated = safeParse(parsedSchema, value);
             if (validated.success) {
               if (["name", "title"].includes(key)) {
-                filename = slugify(validated.output);
+                filename = slugify(validated.output) + ".md";
               }
               return;
             } else {
